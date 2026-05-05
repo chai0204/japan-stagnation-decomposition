@@ -6,15 +6,38 @@ This document provides step-by-step instructions to replicate all results in the
 
 ## Prerequisites
 
-### System
-- Linux / macOS / WSL2
-- Python 3.12 or later
-- ~5 GB free disk space (data + figures)
-- Internet connection (for API data fetching)
+### Exact environment used (for full bit-level reproducibility)
 
-### Software
-- `uv` (recommended) or `pip` for Python package management
-- `git` for version control
+This is the exact environment used to produce all results in the paper:
+
+- **OS**: Linux (Ubuntu 24.04 / WSL2 on Windows 11). Also tested on macOS.
+- **Python**: 3.12.3 (specified in `.python-version`)
+- **uv**: 0.10.7 or later (recommended package manager)
+- **Disk space**: ~5 GB (data + figures)
+- **RAM**: 2 GB minimum, 4 GB recommended (SVAR bootstrap with B=500)
+- **Internet**: required for API data fetching (~1 GB total)
+
+Library versions are pinned in `uv.lock` (46 transitive dependencies). Key direct dependencies:
+
+| Library | Pinned version |
+|---|---|
+| pandas | >=2.0 (lock: 2.x) |
+| numpy | >=1.26 (lock: 1.26.x) |
+| scipy | >=1.11 (lock: 1.x) |
+| statsmodels | >=0.14.6 (lock: 0.14.x) |
+| linearmodels | >=7.0 (lock: 7.x) |
+| matplotlib | >=3.8 (lock: 3.x) |
+| fredapi | >=0.5 (lock: 0.5.x) |
+| requests | >=2.31 (lock: 2.x) |
+| python-dotenv | >=1.0 (lock: 1.x) |
+
+The `uv.lock` file pins exact versions for full reproducibility. Use `uv sync` to install the exact pinned versions.
+
+### Compatibility notes
+
+- Python 3.13: Should work but not extensively tested.
+- Python 3.11 or earlier: NOT supported (some modules use 3.12+ syntax).
+- Cross-OS reproducibility: Numerical results should match across Linux/macOS/Windows. Original paper results were produced on Linux (WSL2).
 
 ### API Keys (free, public)
 
@@ -28,21 +51,43 @@ OECD SDMX, World Bank WDI, and Penn World Tables require **no API key**.
 
 ---
 
-## Setup
+## Setup (exact reproduction)
+
+### Recommended: using uv (fastest, most reproducible)
+
+```bash
+# 1. Install uv (one time)
+curl -LsSf https://astral.sh/uv/install.sh | sh   # Linux/macOS
+# Or: pip install uv
+
+# 2. Clone and sync
+git clone https://github.com/chai0204/japan-stagnation-decomposition.git
+cd japan-stagnation-decomposition
+
+# 3. Install exact pinned versions from uv.lock
+uv sync   # Reads .python-version + uv.lock for full reproducibility
+
+# 4. Set up FRED API key
+echo "FRED_API_KEY=your_key" > .env
+```
+
+### Alternative: using pip
 
 ```bash
 git clone https://github.com/chai0204/japan-stagnation-decomposition.git
 cd japan-stagnation-decomposition
-uv sync   # installs all dependencies from pyproject.toml
-```
 
-If using pip instead:
-
-```bash
-python -m venv .venv
+# Use Python 3.12 specifically
+python3.12 -m venv .venv
 source .venv/bin/activate
-pip install pandas numpy matplotlib scipy statsmodels linearmodels fredapi requests python-dotenv
+
+# Install based on pyproject.toml (minimum versions)
+pip install -e .
+
+echo "FRED_API_KEY=your_key" > .env
 ```
+
+**Note**: `pip install -e .` uses minimum-version constraints (`>=`). For exact bit-level reproducibility (matching paper figures and tables exactly), use `uv sync` which reads `uv.lock`. Otherwise, results should still match within numerical precision.
 
 ---
 

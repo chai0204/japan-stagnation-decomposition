@@ -79,20 +79,33 @@ Each tier captures a different aspect of welfare:
 
 ## Reproducibility
 
-All data is **publicly accessible**. The collectors fetch from:
+### Environment specification
 
-- World Bank WDI (REST API)
-- FRED (`fredapi`, requires API key in `.env`)
-- OECD SDMX (REST API)
+This research was produced under:
+
+- **OS**: Linux (Ubuntu 24.04 on WSL2)
+- **Python**: 3.12.3 (pinned via `.python-version`)
+- **uv**: 0.10.7 (recommended package manager; fastest path to exact reproduction)
+- **Library versions**: Fully pinned in `uv.lock` (46 transitive dependencies)
+
+For exact bit-level reproduction, use `uv sync` which reads `uv.lock`. For approximate reproduction, `pip install -e .` works with the minimum constraints in `pyproject.toml`.
+
+### Data sources (all public, free)
+
+The collectors fetch from:
+
+- World Bank WDI (REST API, no key required)
+- FRED (`fredapi`, requires free API key in `.env`)
+- OECD SDMX (REST API, no key required)
 - Penn World Tables (embedded values, originally from GGDC)
 
-To replicate:
+### Quick start
 
 ```bash
-# 1. Setup
+# 1. Clone and install exact pinned versions
 git clone https://github.com/chai0204/japan-stagnation-decomposition
 cd japan-stagnation-decomposition
-uv sync
+uv sync   # uses .python-version + uv.lock
 
 # 2. Get FRED API key (free at https://fred.stlouisfed.org)
 echo "FRED_API_KEY=your_key" > .env

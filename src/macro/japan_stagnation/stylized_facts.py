@@ -32,7 +32,11 @@ from src.collectors.wdi_collector import COUNTRIES, load_country
 
 REPO_ROOT = Path(__file__).parents[3]
 PROCESSED_DIR = REPO_ROOT / "data" / "processed"
-FIG_DIR = REPO_ROOT / "docs" / "papers" / "japan-stagnation-decomposition" / "figures"
+# Auto-detect repo structure: standalone repo (figures/ at root) or
+# original econ-research repo (docs/papers/japan-stagnation-decomposition/figures/)
+_STANDALONE_FIG = REPO_ROOT / "figures"
+_ORIGINAL_FIG = REPO_ROOT / "docs" / "papers" / "japan-stagnation-decomposition" / "figures"
+FIG_DIR = _STANDALONE_FIG if _STANDALONE_FIG.exists() else _ORIGINAL_FIG
 
 COUNTRY_ORDER = ["JPN", "USA", "DEU", "FRA", "GBR", "ITA", "CAN", "KOR"]
 COUNTRY_LABEL = {
