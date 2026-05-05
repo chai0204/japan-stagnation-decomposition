@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+type: article
+title: "Decomposing Japan's Stagnation: Demographics, Internationalization, and Wage-Productivity Transmission"
+authors:
+  - family-names: "Komatsu"
+    given-names: "Shun"
+    affiliation: "Independent Researcher"
+    email: "junxiaosong508@gmail.com"
+date-released: 2026-05-05
+version: "1.0"
+url: "https://github.com/chai0204/japan-stagnation-decomposition"
+abstract: >-
+  This paper systematically decomposes Japan's economic stagnation
+  using G7 + Korea + Nordic panels (1990-2024) and develops a four-tier
+  hierarchy of theoretical models (Static, DSGE-light, HANK-light, full
+  HANK+DSGE). Headline GDP growth gap is 78-106% demographic; per-hour
+  productivity grew +67% (1995-2024) comparable to USA. Truly Japan-specific
+  phenomena are wage-productivity transmission failure (Japan dummy =
+  -2.35%/yr robust to HAC and subsamples) and service-sector low productivity
+  (-31% vs Germany, -36% vs USA per-hour). Combined ICT-investment-plus-
+  wage-share reform yields lifetime CE welfare +25.8% with 95% of population
+  gaining and inequality declining 44%.
+keywords:
+  - economic stagnation
+  - demographics
+  - per-hour productivity
+  - wage-productivity transmission
+  - labor share
+  - international comparison
+  - household financial assets
+  - HANK
+  - DSGE
+  - formal economic model
+  - Japan
+  - G7
+license: CC-BY-4.0
+repository-code: "https://github.com/chai0204/japan-stagnation-decomposition"
+preferred-citation:
+  type: article
+  title: "Decomposing Japan's Stagnation: Demographics, Internationalization, and Wage-Productivity Transmission"
+  authors:
+    - family-names: "Komatsu"
+      given-names: "Shun"
+  year: 2026
+  notes: "Working paper, SSRN ID forthcoming"

@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# uv
+.uv/
+
+# Environment
+.env
+.env.local
+
+# Data (regenerable from APIs)
+data/raw/
+data/processed/
+*.csv
+
+# Build artifacts
+dist/
+build/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

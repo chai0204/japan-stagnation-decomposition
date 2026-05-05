@@ -1,0 +1,52 @@
+[project]
+name = "japan-stagnation-decomposition"
+version = "1.0.0"
+description = "Decomposing Japan's economic stagnation: empirical and theoretical analysis"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MIT (code) / CC-BY-4.0 (paper)"}
+authors = [
+    {name = "Shun Komatsu", email = "junxiaosong508@gmail.com"},
+]
+keywords = [
+    "economics", "japan", "stagnation", "demographics", "productivity",
+    "wage", "labor share", "DSGE", "HANK", "international comparison",
+]
+dependencies = [
+    # Data fetching
+    "fredapi>=0.5",
+    "requests>=2.31",
+    "python-dotenv>=1.0",
+    # Data processing
+    "pandas>=2.0",
+    "numpy>=1.26",
+    # Statistics
+    "scipy>=1.11",
+    "statsmodels>=0.14.6",
+    "linearmodels>=7.0",
+    # Visualization
+    "matplotlib>=3.8",
+    # PDF generation (optional)
+    "markdown>=3.5",
+    "weasyprint>=68.0",
+    "pygments>=2.16",
+]
+
+[project.urls]
+Repository = "https://github.com/chai0204/japan-stagnation-decomposition"
+"Bug Tracker" = "https://github.com/chai0204/japan-stagnation-decomposition/issues"
+SSRN = "https://ssrn.com/abstract=TBA"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
