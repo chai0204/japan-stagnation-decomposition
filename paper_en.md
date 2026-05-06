@@ -19,7 +19,7 @@ This paper systematically tests this question using a panel of G7 countries plus
 
 These descriptive facts generate the following testable hypotheses. **H1**: Controlling for demographics, Japan's stagnation is statistically indistinguishable from the G7 average. **H2**: The GNI–GDP gap is largest among the G7. **H3**: The low export/GDP ratio is structural but, combined with active outward FDI, cannot be explained by simple "closed economy" stories. **H4–H7**: Linguistic-distance trade suppression, Korea's overcoming of it, household capital outflow endogeneity, and the digital deficit are identified via SVAR and gravity models. **H8** (added): Even after controlling for per-WA productivity, Japan's wages are uniquely depressed. **H8b**: This holds after composition-effect (female LFP, hours worked) adjustment. **H9**: Japan's productivity gap with the U.S. and Germany is concentrated in services.
 
-**Additional theoretical contributions**: We develop and integrate four theoretical models. **(i) Formal model** (two-sector small open economy with wage-distribution parameter ω) integrates the empirical findings. **(ii) DSGE-light** (perfect-foresight intertemporal optimization with ICT capital accumulation) measures transition costs. **(iii) HANK-light** (four heterogeneous household types) identifies redistribution welfare effects. **(iv) Full HANK+DSGE integration** combines dynamics × heterogeneity, yielding a lifetime CE welfare gain of +25.8% (95% of the population gains; 5% — self-employed/owners — face transition losses requiring policy compensation), with inequality (Gini-like) declining 44%. This represents a theoretical implementation at the AER/QJE level.
+**Additional theoretical contributions**: We develop and integrate four theoretical models. **(i) Formal model** (two-sector small open economy with wage-distribution parameter ω) organizes the empirical findings theoretically. **(ii) DSGE-light** (perfect-foresight intertemporal optimization with ICT capital accumulation) illustrates transition costs. **(iii) HANK-light** (four heterogeneous household types) illustrates redistribution welfare effects. **(iv) Full HANK+DSGE integration** combines dynamics × heterogeneity, simulating a lifetime CE welfare gain of +25.8% (95% of the population gains; 5% — self-employed/owners — face transition losses requiring policy compensation), with inequality (Gini-like) declining 44%. **These results are calibration-dependent and should be read as the central value within a model-setting sensitivity range of [+8%, +55%], not as point estimates with confidence intervals**.
 
 **Main policy implications**: Combined ICT investment + wage-share restoration reform yields **GDP +33%, wages +35–60%, and CE welfare +25.8%** in potential improvement. The Nordic services-economy model is a useful reference. The popular narratives of "household capital outflow as cause" and "digital deficit crisis" lack empirical grounding; policy resources should be concentrated on **service-sector ICT investment + wage-distribution mechanism restoration + transitional support for self-employed sector**.
 
@@ -497,7 +497,7 @@ Robustness: (i) Pre-COVID (1995–2019), (ii) Korea-excluded sample.
 
 Three main findings:
 
-1. **The transition from Model 1A to 1B is decisive**. In total GDP, Japan is 1.37%/year slower than other countries; converting to per-working-age, the gap narrows to –0.38%/year and **becomes statistically insignificant**. This is a complete replication of Fernández-Villaverde et al. (2024) for our sample.
+1. **The transition from Model 1A to 1B is central**. In total GDP, Japan is 1.37%/year slower than other countries; converting to per-working-age, the gap narrows to –0.38%/year and **becomes statistically insignificant**. This replicates Fernández-Villaverde et al. (2024) on our sample.
 2. **In the ex-Korea sample, Model 1B's coefficient is –0.011%/year (p = 0.932)** — Japan's per-WA growth rate is essentially indistinguishable from other G7 countries. **Strongly supports H1.**
 3. **In Model 1E (with country fixed effects), the coefficient becomes significant again at –0.99**. This suggests that **Japan's per-WA growth rate has been declining over time** relative to others. The difference between Model 1B (no country FE) and Model 1E (with country FE) suggests Japan's long-term trend is diverging.
 
@@ -1653,18 +1653,34 @@ $$\lambda_i = \exp\left(\frac{V_i^{\text{reform}} - V_i^{\text{base}}}{D}\right)
 
 → Combined reform is **most equality-improving throughout the transition period**.
 
-### 6.16.4 4-model hierarchy aggregate welfare comparison
+### 6.16.4 4-model hierarchy aggregate welfare comparison (interval estimate)
 
 **Table 28: Aggregate welfare by model variant (wage reform alone and combined)**
 
-| Model | ICT | Wage | Combined | What it captures |
-|---|---|---|---|---|
-| Static (Extended) | +43.5% | 0% | +43.5% | Level changes |
-| DSGE-light | +8.3% | 0% | +8.3% | + Dynamics |
-| HANK-light | +43.5% | +8.4% | +55.5% | + Heterogeneity |
-| **Full HANK+DSGE** | **+18.1%** | **+6.7%** | **+25.8%** | + **Dynamics × heterogeneity** |
+| Model | ICT | Wage | Combined | Captures | Omits |
+|---|---|---|---|---|---|
+| Static (Extended) | +43.5% | 0% | +43.5% | Level changes | Dynamics, distribution |
+| DSGE-light | +8.3% | 0% | +8.3% | + Dynamics | Distribution |
+| HANK-light | +43.5% | +8.4% | +55.5% | + Heterogeneity | Dynamics |
+| **Full HANK+DSGE** | **+18.1%** | **+6.7%** | **+25.8%** | + **Dynamics × heterogeneity** | Uncertainty, endogenous MPC, continuous distribution |
 
-→ **The full model is between static (overestimate) and DSGE alone (HANK ignored)**. This is the closest to "true" reform effect.
+**Interpretation as a range**:
+
+- **Combined-reform aggregate welfare: sensitivity range [+8.3%, +55.5%]** across all model variants.
+- **Central simulation under dynamics × heterogeneity: +25.8%**.
+- Static (+43.5%) and HANK-light (+55.5%) **ignore transition costs** and overestimate.
+- DSGE-light (+8.3%) **ignores distribution** and mechanically zeroes out wage reform.
+- HANK+DSGE Full (+25.8%) incorporates both, but **(i) no continuous income distribution, (ii) MPCs not endogenous, (iii) no uncertainty**.
+
+**Calibration dependence (explicitly disclosed)**:
+
+These numbers are **calibration-based simulations**, not structurally estimated (SMM/Bayesian). Sensitivity to main parameters is shown in §7.4.2 (R-2):
+
+- α (capital share) ∈ [0.25, 0.40]: results completely invariant.
+- γ (ICT elasticity) ∈ [0.30, 0.70]: GDP effect varies linearly over **[+23.5%, +67.8%]**.
+- ρ (reform speed) ∈ [0.05, 0.30]: year-30 convergence values nearly invariant; only transition period changes.
+
+**Substantive range**: Given plausible γ values from prior literature, the combined-reform aggregate welfare effect lies approximately in **[+15%, +40%]**. **+25.8% should be read as a central simulation, not a point estimate**. No confidence intervals are available without structural estimation.
 
 ### 6.16.5 Important findings
 
@@ -1724,7 +1740,7 @@ ICT and wage alone have limited effects (+18%, +7%). **Combined package yields +
 
 #### Design principle 3: Implement early
 
-Under β=0.96 discounting, **delaying reform start by 5 years reduces cumulative welfare by -17%**. Speed is decisive.
+Under β=0.96 discounting, **delaying reform start by 5 years reduces cumulative welfare by -17%** (calibration-based). Earlier implementation is preferable.
 
 #### Design principle 4: Transitional support
 
@@ -1761,9 +1777,7 @@ HANK-light (household heterogeneity)
 HANK+DSGE Full (dynamic × heterogeneous)
 ```
 
-Each tier provides a different perspective and is **complementary**. The final policy recommendation of **HANK+DSGE Full's +25.8% aggregate welfare** is the most credible estimate.
-
-This is an implementation that satisfies the AER / QJE / Econometrica standard for "heterogeneity + dynamics."
+Each tier provides estimates **under different assumption sets** and is complementary. The HANK+DSGE Full result of +25.8% represents the **central simulation** when both dynamics and heterogeneity are incorporated; the sensitivity range across model variants is [+18%, +43%] (ICT alone +18%, Combined +25.8%, HANK-light static +55.5% — varying with calibration). **All values are calibration-based, not structurally estimated (SMM/Bayesian); confidence intervals are not provided**.
 
 ---
 
@@ -1794,7 +1808,7 @@ For H1, **3 independent verifications** confirm support:
 - Growth-accounting decomposition: 78–106% of Japan-vs.-G7 gap explained by demographics.
 - Per-WA cumulative growth rate: Japan +46% vs. Germany +49.5%, UK +46.5% (Phase 0 Table 1).
 
-For H6, **cross-country analysis is decisive**:
+For H6, **cross-country analysis provides supporting context**:
 - Japan-only SVAR shows "H6 supported" but it's unclear if Japan-specific.
 - 8-country comparison (G7 + Korea) identifies "Japan pattern is similar to Korea, France; differs from USA, Germany, Italy."
 - This grounds reinterpreting H6 as a phenomenon **dependent on economic structure** (net creditor vs. financial center).
@@ -1912,14 +1926,55 @@ Comparing model predictions with observations across 5 countries (JPN, USA, GBR,
 3. **Formal-model prediction credibility is high**: Correlation 0.993 with observed data.
 4. **Policy implications (GDP +33-43%, wages +35-59%) stable** across parameters and samples.
 
-### 7.5 Identification limitations
+### 7.5 Identification limitations (expanded)
+
+This study is an empirical analysis based on observational data and faces **several substantive limitations on causal identification**. Readers should interpret results with these in mind.
+
+#### 7.5.1 Econometric and data limitations
 
 1. **Aggregate data only**: No firm or household micro data.
-2. **SVAR proxy variable**: Current account is incomplete proxy. Re-verification with BOJ Flow of Funds household foreign portfolio investment data has scope.
+2. **SVAR proxy variable**: Current account is an incomplete proxy. Re-verification with BOJ Flow of Funds household foreign portfolio investment data is needed.
 3. **Static linguistic distance index**: Does not capture time variation (educational English-ization, etc.).
 4. **Gravity model unestimated**: H4 and H5 only descriptively supported; formal econometric estimation in Phase 2.
 5. **Limited robustness verification**: Only 2 subsamples (pre-COVID, ex-Korea) implemented in Phase 1 of 5-layer validation.
 6. **Short post-NISA sample**: Only 2024Q1–2024Q4 (4 quarters). Need to re-evaluate structural change with 2026+ data.
+
+#### 7.5.2 Reservations on causality of H6 (capital outflow → stagnation)
+
+This paper concludes that household capital outflow is "consequence, not cause" of stagnation, but **this claim must be interpreted cautiously**:
+
+- **Reliance on observational data**: Households' foreign asset choice responds endogenously to many factors simultaneously — domestic stagnation, tax policy (NISA), interest rate differentials, exchange rate expectations. The Cholesky identification of SVAR has inherent observational equivalence problems.
+- **Reverse causality cannot be fully ruled out**: Granger non-causality (CA→GDP, p=0.346) does not exclude bidirectional effects or simultaneity.
+- **Insufficient post-NISA verification**: The 2024Q1+ regime change is an ideal natural experiment, but 4 quarters are insufficient for DID estimation.
+- **Policy implication**: H6 should be treated as **suggestive**, not confirmatory. It does not provide grounds for capital-control or restrictive policy proposals.
+
+#### 7.5.3 Structural model interpretation limits
+
+1. **No structural estimation**: The 4-tier model hierarchy is **calibration-based**; no SMM or Bayesian structural estimation has been performed. Therefore, model-parameter confidence intervals cannot be assigned. Sensitivity analysis (§7.4.2) only provides ranges.
+2. **No continuous distribution in HANK**: 4-type discrete model; does not capture continuous-distribution dynamics (Aiyagari-Bewley-Huggett type).
+3. **Exogenous MPCs**: In HANK, MPCs are fixed by income type and are not allowed to vary endogenously.
+4. **No uncertainty**: Even HANK+DSGE Full does not incorporate nonlinear dynamics or stochastic shocks. Solutions are deterministic perfect-foresight.
+5. **Cross-variant dispersion**: Aggregate welfare effects vary across variants over [+8.3%, +55.5%] (§6.16.4). The +25.8% is a central simulation, not a point estimate.
+
+#### 7.5.4 Marginal statistical results
+
+The following results have p-values below 0.05 but become **marginal** after correction or sensitivity analysis:
+
+- **H6 Granger causality (CA→GDP) p=0.094**: After BH correction, p=0.18 — not significant.
+- **Sectoral productivity gaps**: Small national observation counts; wide confidence intervals on coefficients.
+- **Synthetic Control permutation test**: p>0.10 in some periods.
+
+These are "suggestive" rather than confirmatory results.
+
+#### 7.5.5 Scope of policy applicability
+
+The policy implications hold only under the following conditions:
+
+- **Structural assumptions hold**: Wage increase ⇒ price pass-through ⇒ inflation ⇒ nominal-wage spiral remains operational in modern Japan.
+- **International environment stable**: Exchange rates, trade structure, geopolitical environment maintain status quo.
+- **Full policy implementation**: Reforms to labor share, ICT investment, etc. are simultaneously and fully implemented.
+
+These assumptions may diverge substantially from reality. **Realized policy effects are likely to be smaller than the numerical estimates in this paper.**
 
 ---
 
@@ -2017,7 +2072,7 @@ This paper integrates the World Bank WDI annual panel of G7 + South Korea (1990�
     - Parameter sensitivity (α completely invariant, γ linear, ρ speed only) → policy implications robust.
 22. **DSGE-light model (perfect-foresight intertemporal optimization)**: Incorporating investment adjustment costs and capital accumulation, **transition cost** of reform measured. Static +43% welfare improvement is **+8.34%** in dynamic CE welfare (discounted PV, β=0.96, T=50). **Transition-period investment-intensive consumption decline cancels long-term gains via discounting**, so policy yields higher cumulative welfare the sooner started. Extended Model (partial adjustment) functions as good approximation of DSGE dynamics. HANK extension enables analysis of household heterogeneity, wage-distribution welfare effects, and optimal policy under uncertainty.
 23. **HANK-light model (4-type heterogeneous households)**: Relaxing representative-household assumption, dividing into 4 types (large-firm regular, SME regular, non-regular, self-employed). Wage reform aggregate welfare is **+8.4% (was 0% in static and DSGE)**. Type-specific: Large-firm +10.7%, SME +9.1%, **non-regular +10.1% (large benefit from high MPC)**, self-employed −16.2%. Combined reform (ICT + wage) yields **aggregate +55.5%, all types positive** (self-employed +20.3%). **Theoretical justification of Spring wage offensive and minimum wage** + suggesting the "labor-share decline of 7.2pp during Lost 30 Years" corresponds to aggregate welfare loss of ≈8%. **HANK identifies true policy effects not captured by representative-household models** — one of the paper's most important theoretical contributions.
-24. **Full HANK + DSGE integration**: Complete integration of dynamics × heterogeneity. In lifetime CE welfare, aggregate ICT +18.1%, wage +6.7%, **combined +25.8%**. Type-specific dynamics show self-employed/owners at **−38.4%** (investment burden + redistribution loss). **95% of population substantially gains, but transitional support measures for the 5% self-employed/owners are politically essential**. Inequality dynamics: Combined reform Gini 0.243 → 0.137 (-44%), inequality compression throughout transition. In comparison of 4-model hierarchy (Static, DSGE, HANK, HANK+DSGE), **the full model provides the "most credible" welfare estimate** (+25.8%). AER/QJE-level theoretical implementation.
+24. **Full HANK + DSGE integration (calibration-based simulation)**: Lifetime CE welfare with dynamics × heterogeneity yields aggregate ICT +18.1%, wage +6.7%, **combined +25.8%** (sensitivity range across model variants: [+8%, +55%]). Type-specific dynamics show self-employed/owners at **−38.4%** (investment burden + redistribution loss). **95% of population substantially gains, but transitional support for the 5% self-employed/owners is needed**. Inequality dynamics: Combined reform Gini 0.243 → 0.137 (-44%). Of the 4-model hierarchy (Static, DSGE, HANK, HANK+DSGE), **the full integration central value is +25.8%**. These are calibration-based simulations, not structurally estimated; **confidence intervals are not provided**.
 
 **Research contributions**:
 
