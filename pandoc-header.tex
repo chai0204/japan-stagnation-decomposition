@@ -1,0 +1,35 @@
+% LaTeX header for high-quality math + Unicode rendering
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\usepackage{amssymb}
+\usepackage{newunicodechar}
+
+% Substitute special Unicode characters that may not be in main font
+\newunicodechar{✓}{\ensuremath{\checkmark}}
+\newunicodechar{✗}{\ensuremath{\times}}
+\newunicodechar{△}{\ensuremath{\triangle}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{↓}{\ensuremath{\downarrow}}
+\newunicodechar{↑}{\ensuremath{\uparrow}}
+\newunicodechar{↛}{\ensuremath{\not\rightarrow}}
+\newunicodechar{↮}{\ensuremath{\not\leftrightarrow}}
+\newunicodechar{⏐}{\ensuremath{|}}
+
+% Math font
+\setmathfont{Latin Modern Math}
+
+% Improve table layout
+\usepackage{longtable,booktabs}
+\usepackage{array}
+
+% Better line spacing
+\usepackage{setspace}
+\setstretch{1.15}
+
+% Reduce orphans/widows
+\widowpenalty=10000
+\clubpenalty=10000

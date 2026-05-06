@@ -24,6 +24,16 @@ dist/
 build/
 *.egg
 
+# PDF test/intermediate files
+*_test.pdf
+*.aux
+*.toc
+*.log
+*.out
+*.lof
+*.lot
+*.synctex.gz
+
 # IDE
 .vscode/
 .idea/

@@ -210,6 +210,23 @@ uv run python -m src.macro.japan_stagnation.hank_light
 uv run python -m src.macro.japan_stagnation.hank_dsge_full
 ```
 
+### PDF generation (optional)
+
+To regenerate `paper_ja.pdf` and `paper_en.pdf` from the Markdown sources with proper LaTeX math rendering:
+
+```bash
+# Install pandoc and LaTeX (Linux)
+sudo apt-get install pandoc texlive-luatex texlive-lang-japanese \
+    texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+
+# Generate both PDFs
+python3 build_pdf.py            # builds paper_ja.pdf and paper_en.pdf
+python3 build_pdf.py --en       # English only
+python3 build_pdf.py --ja       # Japanese only
+```
+
+If pandoc/LuaLaTeX is not available, a weasyprint-based fallback is provided (`python3 build_pdf.py --weasy`), but **math equations will appear as raw LaTeX source** with this fallback.
+
 ### Phase 6: Robustness (§7)
 
 ```bash

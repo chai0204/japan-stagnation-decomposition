@@ -33,7 +33,7 @@ These descriptive facts generate the following testable hypotheses. **H1**: Cont
 
 ### 1.1 Motivation
 
-Japan's long-term economic stagnation has been a primary subject of economic research for the past 30 years. From 1995 to 2022, Japan's nominal GDP (in U.S. dollars) **declined** from approximately $5.3 trillion to $4.2 trillion, while the U.S. expanded from $7.6 trillion to $25.5 trillion and Germany grew from $2.6 trillion to $4.1 trillion. Japan's average wage has remained nearly flat at the 1995 level, while the OECD average rose 32.5% over the same period (OECD 2023). These figures have been repeatedly cited to portray Japan as "the most stagnated economy" in the G7.
+Japan's long-term economic stagnation has been a primary subject of economic research for the past 30 years. From 1995 to 2022, Japan's nominal GDP (in U.S. dollars) **declined** from approximately \$5.3 trillion to \$4.2 trillion, while the U.S. expanded from \$7.6 trillion to \$25.5 trillion and Germany grew from \$2.6 trillion to \$4.1 trillion. Japan's average wage has remained nearly flat at the 1995 level, while the OECD average rose 32.5% over the same period (OECD 2023). These figures have been repeatedly cited to portray Japan as "the most stagnated economy" in the G7.
 
 However, this depiction has been challenged by recent research. First, Fernández-Villaverde, Ventura, and Yao (2024) showed that, in per-working-age real GDP growth from 1998 to 2019, Japan accumulated 31.9% growth, **exceeding** the U.S.'s 29.5%. Even over 1991–2019, the annual difference is only 0.26% (Japan 1.39%, U.S. 1.65%). Second, Bahar, Arcay, Daboin Pacheco, and Hausmann (2024) showed that Japan has consistently held the #1 position in the Economic Complexity Index (ECI) since 1981, and in recent years has expanded its "overseas economic activity" through R&D licensing and outward FDI returns — at the expense of declining goods export shares. Their estimates show that Japan's GNI–GDP gap is third-largest among high-income countries (after Hong Kong and Norway), substantially higher than the U.S. and Germany.
 
@@ -238,7 +238,7 @@ Standard gravity model, estimating how much lower Japan's fixed effect is relati
 
 $$\mathbf{A}_0 \mathbf{y}_t = \sum_{k=1}^{p} \mathbf{A}_k \mathbf{y}_{t-k} + \mathbf{u}_t$$
 
-- $\mathbf{y}_t = $ (GDP growth rate, real wage, household foreign-asset ratio, exchange rate)
+- $\mathbf{y}_t$ = (GDP growth rate, real wage, household foreign-asset ratio, exchange rate)
 - Cholesky identification + impulse response to structural shocks.
 - We can reuse the existing `src/welfare/svar.py`.
 
@@ -1096,10 +1096,10 @@ We estimate numerical impact for the central policy proposals (wage-distribution
 
 | Scenario | Content | GDP effect | Wage effect |
 |---|---|---|---|
-| Scenario 1 | Labor share to German level (+8.2pp) | — | **+15.3%** ($405B additional wages) |
-| Scenario 2 | Service-sector productivity to German level (per-hour +31%) | **+21.6%** ($1.02T) | — |
-| Scenario 3 | Exports/GDP to Finnish level (+22pp) | +11.2% ($528B) | — |
-| **Combined** | **All three simultaneously** | **+33% ($1.55T)** | **+35%** |
+| Scenario 1 | Labor share to German level (+8.2pp) | — | **+15.3%** (\$405B additional wages) |
+| Scenario 2 | Service-sector productivity to German level (per-hour +31%) | **+21.6%** (\$1.02T) | — |
+| Scenario 3 | Exports/GDP to Finnish level (+22pp) | +11.2% (\$528B) | — |
+| **Combined** | **All three simultaneously** | **+33% (\$1.55T)** | **+35%** |
 
 Caveat: This is a simple comparative-statics analysis based on observational data, not a structural model. General-equilibrium effects and dynamic paths are not captured. **A starting point for policy discussion that conveys order of magnitude**.
 
