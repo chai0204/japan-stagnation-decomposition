@@ -120,8 +120,8 @@ def estimate_did(df: pd.DataFrame, outcome: str) -> dict:
     }
 
 
-def event_study(df: pd.DataFrame, outcome: str, lags: int = 8, leads: int = 4) -> pd.DataFrame:
-    """イベントスタディ：四半期相対距離別ダミー × 処置を推定."""
+def event_study(df: pd.DataFrame, outcome: str, lags: int = 8, leads: int = 4) -> dict:
+    """イベントスタディ：四半期相対距離別ダミー × 処置を推定 + parallel trends test."""
     sub = df.dropna(subset=[outcome]).copy()
     sub = sub.sort_values(["country", "date"]).reset_index(drop=True)
 
@@ -131,12 +131,15 @@ def event_study(df: pd.DataFrame, outcome: str, lags: int = 8, leads: int = 4) -
     sub["rel_q"] = sub["rel_q"].clip(-lags, leads)
 
     dummy_cols = []
+    pre_dummy_cols = []  # parallel trends test 用
     for k in range(-lags, leads + 1):
-        if k == -1:
+        if k == -1:  # baseline
             continue
         col = f"D_{'m' if k < 0 else 'p'}{abs(k)}"
         sub[col] = ((sub["rel_q"] == k) & (sub["country"] == TREATED_COUNTRY)).astype(int)
         dummy_cols.append((k, col))
+        if k < -1:
+            pre_dummy_cols.append(col)
 
     rhs = " + ".join(c for _, c in dummy_cols) + " + C(country) + C(quarter)"
     formula = f"{outcome} ~ {rhs}"
@@ -144,8 +147,8 @@ def event_study(df: pd.DataFrame, outcome: str, lags: int = 8, leads: int = 4) -
         fit = smf.ols(formula, data=sub).fit(
             cov_type="cluster", cov_kwds={"groups": sub["country"]}
         )
-    except Exception as e:
-        return pd.DataFrame()
+    except Exception:
+        return {"events": pd.DataFrame(), "pretrend_p": np.nan, "pretrend_F": np.nan}
 
     rows = []
     for k, col in dummy_cols:
@@ -157,7 +160,50 @@ def event_study(df: pd.DataFrame, outcome: str, lags: int = 8, leads: int = 4) -
             "ci_high": float(fit.conf_int().loc[col, 1]) if col in fit.params else np.nan,
         })
     rows.append({"rel_q": -1, "beta": 0.0, "se": 0.0, "ci_low": 0.0, "ci_high": 0.0})
-    return pd.DataFrame(rows).sort_values("rel_q").reset_index(drop=True)
+    events_df = pd.DataFrame(rows).sort_values("rel_q").reset_index(drop=True)
+
+    # Parallel trends test: pre-treatment dummies が同時にゼロか
+    pretrend_p, pretrend_F = np.nan, np.nan
+    if pre_dummy_cols:
+        try:
+            hyp = ", ".join(f"{c} = 0" for c in pre_dummy_cols)
+            f_test = fit.f_test(hyp)
+            pretrend_F = float(f_test.fvalue)
+            pretrend_p = float(f_test.pvalue)
+        except Exception:
+            pass
+
+    return {"events": events_df, "pretrend_p": pretrend_p, "pretrend_F": pretrend_F}
+
+
+def compute_mde(
+    df: pd.DataFrame, outcome: str, alpha: float = 0.05, power: float = 0.80
+) -> dict:
+    """Minimum Detectable Effect（MDE）を係数の SE から逆算する.
+
+    MDE ≈ (z_{α/2} + z_{β}) × SE
+    （DID 設計、cluster SE が直接観察可能な場合の近似）
+    """
+    from scipy import stats as sst
+
+    res = estimate_did(df, outcome)
+    if "se" not in res:
+        return {}
+    z_alpha = sst.norm.ppf(1 - alpha / 2)
+    z_beta = sst.norm.ppf(power)
+    mde = (z_alpha + z_beta) * res["se"]
+    return {
+        "outcome": outcome,
+        "se": res["se"],
+        "n_post_treated": int(((df["country"] == TREATED_COUNTRY)
+                               & (df["date"] >= TREATMENT_DATE)
+                               & df[outcome].notna()).sum()),
+        "alpha": alpha,
+        "power": power,
+        "mde": float(mde),
+        "observed_beta": res["beta"],
+        "observable_with_power": abs(res["beta"]) >= mde,
+    }
 
 
 def placebo_test(df: pd.DataFrame, outcome: str, n_placebo: int = 30) -> dict:
@@ -301,9 +347,36 @@ def run(verbose: bool = True) -> dict:
             )
 
     event_results = {}
+    pretrend_results = {}
     for o in outcomes:
         ev = event_study(df, o, lags=8, leads=4)
-        event_results[o] = ev
+        event_results[o] = ev["events"]
+        pretrend_results[o] = {
+            "pretrend_p": ev["pretrend_p"],
+            "pretrend_F": ev["pretrend_F"],
+        }
+        if verbose:
+            print(
+                f"\n  [{o}] Parallel trends test: F = {ev['pretrend_F']:.3f}, "
+                f"p = {ev['pretrend_p']:.3f} "
+                f"({'PASS — pre-trends ≈ 0' if ev['pretrend_p'] > 0.10 else 'WARN — pre-trends violated'})"
+            )
+
+    # MDE
+    if verbose:
+        print(f"\n[MDE — Minimum Detectable Effect (α=0.05, power=0.80)]")
+    mde_results = {}
+    for o in outcomes:
+        m = compute_mde(df, o, alpha=0.05, power=0.80)
+        mde_results[o] = m
+        if verbose and m:
+            verdict = ("✗ underpowered (|β| < MDE)" if not m["observable_with_power"]
+                       else "✓ powered to detect")
+            print(
+                f"  [{o}] post-treated N = {m['n_post_treated']}, "
+                f"SE = {m['se']:.3f}, MDE = {m['mde']:.3f}, "
+                f"observed |β| = {abs(m['observed_beta']):.3f} → {verdict}"
+            )
 
     placebo_results = []
     for o in outcomes:
