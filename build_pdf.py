@@ -103,14 +103,14 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.en:
-        targets = [(THIS_DIR / "paper_en.md", THIS_DIR / "paper_en.pdf", "en")]
+        targets = [(THIS_DIR / "paper_en_v2.md", THIS_DIR / "paper_en_v2.pdf", "en")]
     elif args.ja:
-        targets = [(THIS_DIR / "paper_ja.md", THIS_DIR / "paper_ja.pdf", "ja")]
+        targets = [(THIS_DIR / "paper_ja_v2.md", THIS_DIR / "paper_ja_v2.pdf", "ja")]
     else:
-        # Default: build both
+        # Default: build both v2
         targets = [
-            (THIS_DIR / "paper_ja.md", THIS_DIR / "paper_ja.pdf", "ja"),
-            (THIS_DIR / "paper_en.md", THIS_DIR / "paper_en.pdf", "en"),
+            (THIS_DIR / "paper_ja_v2.md", THIS_DIR / "paper_ja_v2.pdf", "ja"),
+            (THIS_DIR / "paper_en_v2.md", THIS_DIR / "paper_en_v2.pdf", "en"),
         ]
 
     if args.weasy:
